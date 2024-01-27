@@ -18,7 +18,7 @@ Figure 1. The clustering behaviour of  PINN predictions. Correlation of $B_{err}
 
 Given this problematic behavior, we conclude that setting $\frac{\gamma}{1-\gamma} > 1$ is not a viable method for improving prediction accuracy. Thus, we tested an alternative approach to improving PINN performance accuracy which we call _collocation resampling_, in which the collocation points used to evaluate the equation loss are resampled after every training iteration. Using this approach, clustering was again exhibited for values of $\frac{\gamma}{1-\gamma} \gtrapprox 1$. However, we discover that for $\frac{\gamma}{1-\gamma} \lessapprox 1$, we observe a 2-3 orders of magnitude decrease in predictive errors compared to training with fixed collocation points, with no clustering. We present these results in Figure 2.
 
-![Highlight clustering for random collocation resampling](https://github.com/YaoGroup/pinn_clusters/blob/main/collocation_resampling_highlight.png)
+![Highlight clustering for random collocation resampling](https://github.com/YaoGroup/pinn_clusters/blob/main/images/collocation_resampling_highlight.png)
 <p align="center">
 Figure 2. Distribution of $B_{err}$, $u_{err}$, and $h_{err}$ using collocation resampling for constant $B(x)$ profile over 501 trials with noise = 0.3. We compare the trial error distributions for values of  $\frac{\gamma}{1-\gamma} < 1.$ No clustering is observed for these values of $\gamma$ using initial training with collocation resampling. In grey, we overlay the prediction errors from all PINN solutions obtained with $\frac{\gamma}{1-\gamma} < 1$ using the original training scheme.
 </p>
