@@ -77,40 +77,6 @@ Includes round truth profiles for $u(x)$ and $h(x)$ from which noisy data is gen
 
 Both ground truth profiles assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definitions and numerical values of $h_0$ and other relevant constants. 
 
-## loss.py
-
-Contains the loss functions used in the paper, namely ```SquareLoss``` used for fixed collocation points, and ```SquareLossRandom``` used for collocation resampling. Please refer to the final section of this README (__"Code Implementation of Collocation Resampling"__) for a detailed explanation of how these two functions differ.
-
-Both loss functions evaluate the predictive accuracy of the neural network after each iteration according to the characteristic objective function of PINN, which we call $J(\Theta)$: ([Raissi et. al, 2019](https://doi.org/10.1016/j.jcp.2018.10.045))
-
-<p align="center">
-$J(\Theta) = \gamma E(\Theta) + (1-\gamma)D(\Theta)$
-</p>
-
-where we introduce an additional hyperparameter $\gamma \in [0.0, 1.0]$ to adjust the relative weighting between the equation loss $E(\Theta)$ and the data loss $D(\Theta)$. $D(\Theta)$ is evaluated at values in the domain where training data is available, while $E(\Theta)$ is evaluated at a set of collocation points sampled _independently_ of the available training data. Please see p. 3 of the main text for the precise definitions of equation and data loss used in our paper; p. 5 of the main text for the governing physics equations enforced by $E(\Theta)$, and ```formulations/eqns_o1_inverse.py``` for the implementation of these equations in our codes.
-
-### Initialization
-An instance of the ```SquareLoss``` function is initialized by the following code:
-```
-loss = SquareLoss(equations=physics_equations, equations_data=data_equations, gamma=gamma)
-```
-where
-* equations: An iterable of callables with the signature ```function(x, neuralnet)``` corresponding to the governing physics equations. To enforce 1D SSA, we pass ```Inverse_1stOrder_Equations``` imported from ```formulations/eqns_o1_inverse.py``` .
-*  equations_data: An iterable of callables with the signature ```function(x, neuralnet)``` corresponding to the governing physics equations. We use ```Data_Equations``` imported from ```formulations/eqns_o1_inverse.py```.
-*  gamma (_float_): the value of $\gamma$ with which to evaluate the objective function $J(\Theta)$.
-
-```SquareLossRandom``` is initialized with the same arguments.
-## formulations
-* ```constants.py```:       defines the values of the physical constants appearing in the physics-enforcing equations.
-* ```eqns_o1_inverse.py```: implements the PINN equations for the ice shelf hardness inversion problem (see Equations (17)-(20), p.5 of the main text).
-* ```helpers.py```:          some additional helper functions. 
-
-## optimization.py
-Implements Adam and L-BFGS optimizers.
-
-## model.py
-Helper functions for neural network initialization.
-
 ## /trial
 This folder contains all trial results discussed in our paper as well as scripts written to facilitate visualization and analysis of results.
 
@@ -148,6 +114,39 @@ We tested $l = 12$ values of $\gamma$ such that $\frac{\gamma}{1-\gamma}$ are lo
 Results from tests with increased neural network width. ux corresponds to x-units per hidden layer. (Noise level = 0.3 for both)
 #### u100_c1k_errs.npy
 Results from final test with two 100-hidden units and 1001 collocation points. (Noise level = 0.3)
+## loss.py
+
+Contains the loss functions used in the paper, namely ```SquareLoss``` used for fixed collocation points, and ```SquareLossRandom``` used for collocation resampling. Please refer to the final section of this README (__"Code Implementation of Collocation Resampling"__) for a detailed explanation of how these two functions differ.
+
+Both loss functions evaluate the predictive accuracy of the neural network after each iteration according to the characteristic objective function of PINN, which we call $J(\Theta)$: ([Raissi et. al, 2019](https://doi.org/10.1016/j.jcp.2018.10.045))
+
+<p align="center">
+$J(\Theta) = \gamma E(\Theta) + (1-\gamma)D(\Theta)$
+</p>
+
+where we introduce an additional hyperparameter $\gamma \in [0.0, 1.0]$ to adjust the relative weighting between the equation loss $E(\Theta)$ and the data loss $D(\Theta)$. $D(\Theta)$ is evaluated at values in the domain where training data is available, while $E(\Theta)$ is evaluated at a set of collocation points sampled _independently_ of the available training data. Please see p. 3 of the main text for the precise definitions of equation and data loss used in our paper; p. 5 of the main text for the governing physics equations enforced by $E(\Theta)$, and ```formulations/eqns_o1_inverse.py``` for the implementation of these equations in our codes.
+
+### Initialization
+An instance of the ```SquareLoss``` function is initialized by the following code:
+```
+loss = SquareLoss(equations=physics_equations, equations_data=data_equations, gamma=gamma)
+```
+where
+* equations: An iterable of callables with the signature ```function(x, neuralnet)``` corresponding to the governing physics equations. To enforce 1D SSA, we pass ```Inverse_1stOrder_Equations``` imported from ```formulations/eqns_o1_inverse.py``` .
+*  equations_data: An iterable of callables with the signature ```function(x, neuralnet)``` corresponding to the governing physics equations. We use ```Data_Equations``` imported from ```formulations/eqns_o1_inverse.py```.
+*  gamma (_float_): the value of $\gamma$ with which to evaluate the objective function $J(\Theta)$.
+
+```SquareLossRandom``` is initialized with the same arguments.
+## formulations
+* ```constants.py```:       defines the values of the physical constants appearing in the physics-enforcing equations.
+* ```eqns_o1_inverse.py```: implements the PINN equations for the ice shelf hardness inversion problem (see Equations (17)-(20), p.5 of the main text).
+* ```helpers.py```:          some additional helper functions. 
+
+## optimization.py
+Implements Adam and L-BFGS optimizers.
+
+## model.py
+Helper functions for neural network initialization.
 
 # Code Implementation of Collocation Resampling
 
