@@ -70,10 +70,10 @@ Numerical $u(x)$ and $h(x)$ solutions for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, 
 ## /trial
 This folder contains all trial results discussed in our paper as well as scripts written to facilitate visualization and analysis of results.
 
-### trial_processing.ipynb
+### ```trial_processing.ipynb```
 Jupyter notebook for consolidating error data from a set of trial result dictionaries into a single numpy array.
 
-### pinn_cluster_plots.ipynb
+### ```pinn_cluster_plots.ipynb```
 Jupyter notebook that loads the numpy error array of a set of training trials and separates trials by $k$-means clustering in log-space. Incllludes code for vizualising clusters, plotting cluster statistics, etc.
 
 ### /trial_results
