@@ -43,7 +43,7 @@ Replace ```environment.yml``` with the environment file appropriate for your pla
    **environment-windows.yml**:          For running on Windows using Tensorflow 2.5 (Tensorflow 2.4 is unsupported on Windows)
 
 # Table of Contents
-## pinn_trial.py
+## example.ipynb
 Main script for training PINNs to predict for the correct 1D $u(x)$ (velocity), $h(x)$ (thickness), and $B(x)$ (hardness) profiles given synthetic noisy data for $u(x)$ and $h(x)$. In addition to training PINNs, this script handles generation of synthetic noisy training data at a specified noise level, as well as evaluation of PINN predictive accuracy compared to ground truth profiles. 
 
 This script requires the user to specify the ground truth $u(x)$, $h(x)$, and $B(x)$ profiles. Currently, $u(x)$ and $h(x)$ profiles are specified by providing a reference to a Python dictionary saved as a ```.mat``` file using the ```N_t``` variable (line 35). The ground truth $B(x)$ profile is specified by passing an array of values to the ```B_truth``` variable  (line 39). ```B_truth``` should contain the ground truth values of $B(x)$ at the same values of $x$ as the ground truth $u(x)$ and $h(x)$ profiles.
@@ -58,6 +58,7 @@ Additionally, this script requires users to specify the following hyperparameter
   * ```adam_resampled```: train with Adam optimizer using collocation resampling.
   * ```adam_fixed```: train with Adam optimizer wih fixed collocation points
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
+    Thus, to train *only* with fixed collocation points, set ```num_iterations_adam_resampled``` to 0. Conversely, to train *only* with collocation resampling, set ```num_iterations_adam_fixed```and ```num_iterations_lbfgs``` to 0.
 
 * test_noise _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
   
