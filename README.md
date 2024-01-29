@@ -59,7 +59,7 @@ Additionally, this script requires users to specify the following hyperparameter
   * ```adam_fixed```: train with Adam optimizer wih fixed collocation points
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
     
-    Thus, to train *only* with fixed collocation points, set ```num_iterations_adam_resampled``` to 0. Conversely, to train *only* with collocation resampling, set ```num_iterations_adam_fixed```and ```num_iterations_lbfgs``` to 0.
+    Thus, to train *only* with fixed collocation points, set ```num_iterations_adam_resampled``` to 0. Conversely, to train *only* with collocation resampling, set ```num_iterations_adam_fixed```and ```num_iterations_lbfgs``` to 0. *Note: it does not make sense to have a ```num_iterations_lbfgs_resampled``` parameter, because L-BFGS is a second order method, and the optimization algorithm is informed based on the evaluation of gradients over several iterations. Resampling the collocation points after every iteration will cause the optimization to terminate prematurely.*
 
 * test_noise _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
   
