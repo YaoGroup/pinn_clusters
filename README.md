@@ -35,11 +35,11 @@ This script requires the user to specify the ground truth $u(x)$, $h(x)$, and $B
 
 Additionally, this script requires users to specify the following hyperparameters relevant to our optimization study:
 
-* N_t _(int)_: Number of collocation points. This number stays fixed, even if the script switches between collocation resampling and fixed collocation points (line 43).
+* ```N_t``` _(int)_: Number of collocation points. This number stays fixed, even if the script switches between collocation resampling and fixed collocation points (line 43).
 
-* layers _(list)_: List specifying the width and depth of the neural network. Specify the size of each layer except for the input layer. e.g. ```layers = [5,5,3]``` for a neural network with two, 5-unit hidden layers. The final value specifies the size of the output layer and must be set to 3 for this problem. (line 47)
+* ```layers``` _(list)_: List specifying the width and depth of the neural network. Specify the size of each layer except for the input layer. e.g. ```layers = [5,5,3]``` for a neural network with two, 5-unit hidden layers. The final value specifies the size of the output layer and must be set to 3 for this problem. (line 47)
 
-* num_iterations_adam_resampled, num_iterations_adam_fixed, num_iterations_lbfgs _(int)_: Specify the number of iterations to train with each optimizer and collocation method (lines 53-55).
+* ```num_iterations_adam_resampled```, ```num_iterations_adam_fixed```, ```num_iterations_lbfgs``` _(int)_: Specify the number of iterations to train with each optimizer and collocation method (lines 53-55).
   * ```adam_resampled```: train with Adam optimizer using collocation resampling.
   * ```adam_fixed```: train with Adam optimizer wih fixed collocation points
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
@@ -49,9 +49,9 @@ Additionally, this script requires users to specify the following hyperparameter
 
    *Note: it does not make sense to have a* ```num_iterations_lbfgs_resampled``` *parameter, because L-BFGS is a second order method in which the update to the neural network weights is informed by the Hessian, which is estimated based on the evaluation of gradients over the past several iterations. Thus L-BFGS is incompatible with the collocation resampling method described in our paper. Resampling the collocation points after every iteration will cause training to terminate prematurely.*
 
-* test_noise _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
+* ```test_noise``` _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
 
-* test_gammas _(list)_: specify one or multiple values of $\gamma$ to test. To conveniently implement logarithmic spacing of $\frac{\gamma}{1-\gamma}$, the user may the specify $\log_{10}(\frac{\gamma}{1-\gamma})$ values using the ```logratios``` variable, then solve for the corresponding $\gamma$-values in the next line (lines 221-222).
+* ```test_gammas``` _(list)_: specify one or multiple values of $\gamma$ to test. To conveniently implement logarithmic spacing of $\frac{\gamma}{1-\gamma}$, the user may the specify $\log_{10}(\frac{\gamma}{1-\gamma})$ values using the ```logratios``` variable, then solve for the corresponding $\gamma$-values in the next line (lines 221-222).
 
 Additional information can be found in the line-by-line explanations provided in the code comments.
 
