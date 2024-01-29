@@ -119,8 +119,9 @@ Jupyter notebook that loads the numpy error array of a set of training trials an
 
 ## result_visualization.ipynb
 Jupyter notebook for visualizing the $u(x)$, $h(x)$, and $B(x)$ profiles predicted by PINN using the training code "pinn_trial.py." We also include code for visualizing the training data that was generated for that trial according to the user-specified noise level. 
-
-## trial_results
+## trial/
+Contains trial_results discussed in the original paper, as well as scripts to facilitate visualization analysis.
+### trial_results
 Numpy arrays of the $B_{\mathrm{err}}$, $u_{\mathrm{err}}$, $h_{\mathrm{err}}$ for different experiments studied in the paper. Each numpy array has shape $(n, m, l)$, where $n$ is the number of values of $\gamma$ tested in the experiment, $m = 3$ is the number of predictive variables (i.e. $u$, $h$, $B$), and $l$ is equal to the number of repeated trials. In this repo, $l=501$ for all experiments. Please use the following code to load each array:
 
 ```
