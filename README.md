@@ -109,7 +109,7 @@ Implements Adam and L-BFGS optimizers.
 Helper functions for neural network initialization.
 
 
-## constantB_uh.mat, sinusoidalB_uh.mat
+## data/constantB_uh.mat, data/sinusoidalB_uh.mat
 Ground truth profiles for $u(x)$ and $h(x)$ from which noisy data is generated. "constantB_uh.mat" are the $u(x)$ and $h(x)$ solutions for $B(x) = 1.0$, $x \in [0.0,1.0]$. "sinusoidalB_uh.mat" are the numerical $u(x)$ and $h(x)$ for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, $x \in [0.0,1.0]$. Both assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definition and numerical value of $h_0$ and other relevant constants. 
 
 ## trial_processing.ipynb
