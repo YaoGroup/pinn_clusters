@@ -102,7 +102,7 @@ where
 ## data
 Ground truth profiles for $u(x)$ and $h(x)$ from which noisy data is generated. 
 * ```constantB_uh.mat```:        analytic $u(x)$ and $h(x)$ solutions for $B(x) = 1.0$, uniformly sampled for $x \in [0.0,1.0]$. 
-* ```sinusoidalB_uh.mat```:   numerical $u(x)$ and $h(x)$ for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, uniformly sampled for $x \in [0.0,1.0]$. 
+* ```sinusoidalB_uh.mat```:   numerical $u(x)$ and $h(x)$ solutions for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, uniformly sampled for $x \in [0.0,1.0]$. 
 
 Both ground truth profiles assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definitions and numerical values of $h_0$ and other relevant constants. 
 
