@@ -114,6 +114,10 @@ We tested $l = 12$ values of $\gamma$ such that $\frac{\gamma}{1-\gamma}$ are lo
 Results from tests with increased neural network width. ux corresponds to x-units per hidden layer. (Noise level = 0.3 for both)
 #### u100_c1k_errs.npy
 Results from final test with two 100-hidden units and 1001 collocation points. (Noise level = 0.3)
+
+## /images
+Contains the images used in the README of this GitHub repo.
+
 ## loss.py
 
 Contains the loss functions used in the paper, namely ```SquareLoss``` used for fixed collocation points, and ```SquareLossRandom``` used for collocation resampling. Please refer to the final section of this README (__"Code Implementation of Collocation Resampling"__) for a detailed explanation of how these two functions differ.
