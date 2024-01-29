@@ -62,11 +62,9 @@ Additionally, this script requires users to specify the following hyperparameter
     Thus, to train *only* with fixed collocation points, set ```num_iterations_adam_resampled``` to 0. Conversely, to train *only* with collocation resampling, set 
     ```num_iterations_adam_fixed```and ```num_iterations_lbfgs``` to 0.
 
-   *Note: it does not make sense to have a ```num_iterations_lbfgs_resampled``` parameter, because L-BFGS is a second order method in which the Hessian is estimated based on the evaluation of gradients over several iterations. Thus L-BFGS is incompatible with the collocation resampling method described in our paper. Resampling the collocation points after every iteration will cause training to terminate prematurely.*
+   *Note: it does not make sense to have a ```num_iterations_lbfgs_resampled``` parameter, because L-BFGS is a second order method in which the update to the neural network weights is informed by the Hessian, which is estimated based on the evaluation of gradients over the past several iterations. Thus L-BFGS is incompatible with the collocation resampling method described in our paper. Resampling the collocation points after every iteration will cause training to terminate prematurely.*
 
 * test_noise _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
-  
-_Note: We have not included the option to run L-BFGS with collocation resampling, as L-BFGS is a second-order optimization algorithm (i.e. the update to the neural network weights is determined by the __two__ preceding iterations); training will quickly terminate if this is attempted._
 
 * test_gammas _(list)_: specify one or multiple values of $\gamma$ to test. To conveniently implement logarithmic spacing of $\frac{\gamma}{1-\gamma}$, the user may the specify $\log_{10}(\frac{\gamma}{1-\gamma})$ values using the ```logratios``` variable, then solve for the corresponding $\gamma$-values in the next line (lines 221-222).
 
