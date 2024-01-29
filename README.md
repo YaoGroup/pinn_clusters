@@ -70,6 +70,13 @@ Additionally, this script requires users to specify the following hyperparameter
 
 Additional information can be found in the line-by-line explanations provided in the code comments.
 
+## /data
+Includes round truth profiles for $u(x)$ and $h(x)$ from which noisy data is generated. 
+* ```constantB_uh.mat```:        analytic $u(x)$ and $h(x)$ solutions for $B(x) = 1.0$, uniformly sampled for $x \in [0.0,1.0]$. 
+* ```sinusoidalB_uh.mat```:   numerical $u(x)$ and $h(x)$ solutions for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, uniformly sampled for $x \in [0.0,1.0]$. 
+
+Both ground truth profiles assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definitions and numerical values of $h_0$ and other relevant constants. 
+
 ## loss.py
 
 Contains the loss functions used in the paper, namely ```SquareLoss``` used for fixed collocation points, and ```SquareLossRandom``` used for collocation resampling. Please refer to the final section of this README (__"Code Implementation of Collocation Resampling"__) for a detailed explanation of how these two functions differ.
@@ -98,24 +105,11 @@ where
 * ```eqns_o1_inverse.py```: implements the PINN equations for the ice shelf hardness inversion problem (see Equations (17)-(20), p.5 of the main text).
 * ```helpers.py```:          some additional helper functions. 
 
-
-## data
-Ground truth profiles for $u(x)$ and $h(x)$ from which noisy data is generated. 
-* ```constantB_uh.mat```:        analytic $u(x)$ and $h(x)$ solutions for $B(x) = 1.0$, uniformly sampled for $x \in [0.0,1.0]$. 
-* ```sinusoidalB_uh.mat```:   numerical $u(x)$ and $h(x)$ solutions for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, uniformly sampled for $x \in [0.0,1.0]$. 
-
-Both ground truth profiles assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definitions and numerical values of $h_0$ and other relevant constants. 
-
-
 ## optimization.py
 Implements Adam and L-BFGS optimizers.
 
 ## model.py
 Helper functions for neural network initialization.
-
-
-## data/constantB_uh.mat, data/sinusoidalB_uh.mat
-Ground truth profiles for $u(x)$ and $h(x)$ from which noisy data is generated. "constantB_uh.mat" are the $u(x)$ and $h(x)$ solutions for $B(x) = 1.0$, $x \in [0.0,1.0]$. "sinusoidalB_uh.mat" are the numerical $u(x)$ and $h(x)$ for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, $x \in [0.0,1.0]$. Both assume boundary conditions $u(0) = 1$, $h(0) = h_0$. See p. 5 of the main text and pp. 2-3 of the supplementary material for the definition and numerical value of $h_0$ and other relevant constants. 
 
 ## trial_processing.ipynb
 Jupyter notebook for consolidating error data from a set of trial result dictionaries into a single numpy array.
