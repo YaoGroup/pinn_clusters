@@ -92,17 +92,17 @@ where ```gi``` should be modified to the index of the $\gamma$-value being exami
 
 Naming conventions for each numpy array are as follows:
 
-#### clean_u206l1kc_errs.npy, nx_u206l1kc_errs.npy
+#### ```clean_u206l1kc_errs.npy```, ```nx_u206l1kc_errs.npy```
 Error results using the standard settings(six, 20-unit hidden layers with $c=1001$ fixed collocation points). The prefix "clean" corresponds to tests using clean training data; prefixes "nx" denote tests using noisy training data, with x specifying the level of noise (i.e. n3_u206l1kc_errs.npy corresponds to noise = 0.3; n05_u206l1kc_errs.npy corresponds to noise = 0.05)
 
-#### resampled_fixed.npy
+#### ```resampled_fixed.npy```
 Results from training with collocation resampling followed by fixed collocation points for noise level $= 0.3$, (see Section 3.4 of the main text, pp. 14-15).
 We tested $l = 12$ values of $\gamma$ such that $\frac{\gamma}{1-\gamma}$ are logarithmically spaced between $[10^{-4}, 10^6]$, i.e., ```gi = 0``` corresponds to $\frac{\gamma}{1-\gamma} = 10^{-4}$, ```gi = 1``` corresponds to $\frac{\gamma}{1-\gamma} = 10^{-3}$, ...```gi = 11``` corresponds to $\frac{\gamma}{1-\gamma} = 10^{7}$. Note that we omit the largest value of $\gamma$ tested in the experiments using fixed collocation points, so that we have one fewer value of $\gamma$. 
 
 
-#### ux_errs
+#### ```ux_errs.npy```
 Results from tests with increased neural network width. ux corresponds to x-units per hidden layer. (Noise level = 0.3 for both)
-#### u100_c1k_errs.npy
+#### ```u100_c1k_errs.npy```
 Results from final test with two 100-hidden units and 1001 collocation points. (Noise level = 0.3)
 
 ## /images
