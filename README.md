@@ -4,6 +4,8 @@
 Accompanying code and results for the paper: "[1D Ice Shelf Hardness Inversion: Clustering Behavior and Collocation Resampling in
 Physics-Informed Neural Networks](https://doi.org/10.1016/j.jcp.2023.112435)"  by Yunona Iwasaki and Ching-Yao Lai. We document the codes used to train PINNs for 1D ice-shelf inverse modeling. Additionally,  we provide scripts to facilitate analysis of training results over repeated trials.
 
+The software and documentation are located in this [repo](https://github.com/YaoGroup/ice_1D_pinn/tree/main): 
+
 Please direct questions about this code and documentation to Ching-Yao Lai (cyaolai@stanford.edu) and Yunona Iwasaki (yiwasaki@berkeley.edu).
 ## Overview
 In our study, we investigated the feasibility of a physics-informed neural network to invert for the correct ice-shelf hardness spatial profile $B(x)$ given sparse, noisy training data of only velocity $u(x)$ and thickness $h(x)$. We found that for training data with realistic levels of noise, PINNs trained using the original formulation of the objective function (equal weighting of equation and data loss) perform poorly over a broad range of PINN hyperparameters. 
