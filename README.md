@@ -25,23 +25,6 @@ Given this problematic behavior, we conclude that setting $\frac{\gamma}{1-\gamm
 Figure 2. Distribution of $B_{err}$, $u_{err}$, and $h_{err}$ using collocation resampling for constant $B(x)$ profile over 501 trials with noise = 0.3. We compare the trial error distributions for values of  $\frac{\gamma}{1-\gamma} < 1.$ No clustering is observed for these values of $\gamma$ using initial training with collocation resampling. In grey, we overlay the prediction errors from all PINN solutions obtained with $\frac{\gamma}{1-\gamma} < 1$ using the original training scheme.
 </p>
 
-
-# Installation
-
-Our script should be run in a conda environment using one of the ```.yml``` files in the ```env``` folder. To install conda, please follow the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
-
-Then, create a conda environment by running the command:
-
-```conda env create -f environment.yml```
-
-Replace ```environment.yml``` with the environment file appropriate for your platform:
-
-   **environment-cluster.yml**:          For running using Tensorflow 2.4 on an HPC cluster (CPU only)
-   
-   **environment-osx.yml**:              For running on Mac OS using Tensorflow 2.4
-   
-   **environment-windows.yml**:          For running on Windows using Tensorflow 2.5 (Tensorflow 2.4 is unsupported on Windows)
-
 # Table of Contents
 ## example.ipynb
 Main script for training PINNs to predict for the correct 1D $u(x)$ (velocity), $h(x)$ (thickness), and $B(x)$ (hardness) profiles given synthetic noisy data for $u(x)$ and $h(x)$. In addition to training PINNs, this script handles generation of synthetic noisy training data at a specified noise level, as well as evaluation of PINN predictive accuracy compared to ground truth profiles. 
@@ -151,6 +134,23 @@ Implements Adam and L-BFGS optimizers.
 
 ## model.py
 Helper functions for neural network initialization.
+
+# Installation
+
+Our script should be run in a conda environment using one of the ```.yml``` files in the ```env``` folder. To install conda, please follow the instructions [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+Then, create a conda environment by running the command:
+
+```conda env create -f environment.yml```
+
+Replace ```environment.yml``` with the environment file appropriate for your platform:
+
+   **environment-cluster.yml**:          For running using Tensorflow 2.4 on an HPC cluster (CPU only)
+   
+   **environment-osx.yml**:              For running on Mac OS using Tensorflow 2.4
+   
+   **environment-windows.yml**:          For running on Windows using Tensorflow 2.5 (Tensorflow 2.4 is unsupported on Windows)
+
 
 # Code Implementation of Collocation Resampling
 
