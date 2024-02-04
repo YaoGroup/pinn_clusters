@@ -68,6 +68,7 @@ Numerical $u(x)$ and $h(x)$ solutions for $B(x) = \\frac{1}{2} \cos{(3\pi x)}$, 
 
 
 ## /trial
+
 This folder contains all trial results discussed in our paper as well as scripts written to facilitate visualization and analysis of results.
 
 ### ```trial_processing.ipynb```
