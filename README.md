@@ -45,9 +45,11 @@ Additionally, this script requires users to specify the following hyperparameter
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
     
 Thus, to train *only* with fixed collocation points, please set 
+
 ```num_iterations_adam_resampled = 0``` 
 
 Conversely, to train *only* with collocation resampling, please set 
+
 ```num_iterations_adam_fixed = 0```
 
 ```num_iterations_lbfgs = 0```
