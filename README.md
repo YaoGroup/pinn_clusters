@@ -45,12 +45,11 @@ Additionally, this script requires users to specify the following hyperparameter
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
     
 Thus, to train *only* with fixed collocation points, please set 
-```
-num_iterations_adam_resampled = 0
-``` 
+```num_iterations_adam_resampled = 0``` 
 
 Conversely, to train *only* with collocation resampling, please set 
 ```num_iterations_adam_fixed = 0```
+
 ```num_iterations_lbfgs = 0```
 
    *Note: it does not make sense to have a* ```num_iterations_lbfgs_resampled``` *parameter, because L-BFGS is a second order method in which the update to the neural network weights is informed by the Hessian, which is estimated based on the evaluation of gradients over the past several iterations. Thus L-BFGS is incompatible with the collocation resampling method described in our paper. Resampling the collocation points after every iteration will cause training to terminate prematurely.*
