@@ -31,15 +31,15 @@ Figure 2. Distribution of $B_{err}$, $u_{err}$, and $h_{err}$ using collocation 
 ## example.ipynb
 Main script for training PINNs to predict for the correct 1D $u(x)$ (velocity), $h(x)$ (thickness), and $B(x)$ (hardness) profiles given synthetic noisy data for $u(x)$ and $h(x)$. In addition to training PINNs, this script handles generation of synthetic noisy training data at a specified noise level, as well as evaluation of PINN predictive accuracy compared to ground truth profiles. 
 
-This script requires the user to specify the ground truth $u(x)$, $h(x)$, and $B(x)$ profiles. Currently, $u(x)$ and $h(x)$ profiles are specified by providing a reference to a Python dictionary saved as a ```.mat``` file using the ```N_t``` variable (line 35). The ground truth $B(x)$ profile is specified by passing an array of values to the ```B_truth``` variable  (line 39). ```B_truth``` should contain the ground truth values of $B(x)$ at the same values of $x$ as the ground truth $u(x)$ and $h(x)$ profiles.
+This script requires the user to specify the ground truth $u(x)$, $h(x)$, and $B(x)$ profiles. Currently, $u(x)$ and $h(x)$ profiles are specified by providing a reference to a Python dictionary saved as a ```.mat``` file using the ```N_t``` variable. The ground truth $B(x)$ profile is specified by passing an array of values to the ```B_truth``` variable. ```B_truth``` should contain the ground truth values of $B(x)$ at the same values of $x$ as the ground truth $u(x)$ and $h(x)$ profiles.
 
 Additionally, this script requires users to specify the following hyperparameters relevant to our optimization study:
 
-* ```N_t``` _(int)_: Number of collocation points. This number stays fixed, even if the script switches between collocation resampling and fixed collocation points (line 43).
+* ```N_t``` _(int)_: Number of collocation points. This number stays fixed, even if the script switches between collocation resampling and fixed collocation points.
 
-* ```layers``` _(list)_: List specifying the width and depth of the neural network. Specify the size of each layer except for the input layer. e.g. ```layers = [5,5,3]``` for a neural network with two, 5-unit hidden layers. The final value specifies the size of the output layer and must be set to 3 for this problem. (line 47)
+* ```layers``` _(list)_: List specifying the width and depth of the neural network. Specify the size of each layer except for the input layer. e.g. ```layers = [5,5,3]``` for a neural network with two, 5-unit hidden layers. The final value specifies the size of the output layer and must be set to 3 for this problem.
 
-* ```num_iterations_adam_resampled```, ```num_iterations_adam_fixed```, ```num_iterations_lbfgs``` _(int)_: Specify the number of iterations to train with each optimizer and collocation method (lines 53-55).
+* ```num_iterations_adam_resampled```, ```num_iterations_adam_fixed```, ```num_iterations_lbfgs``` _(int)_: Specify the number of iterations to train with each optimizer and collocation method.
   * ```adam_resampled```: train with Adam optimizer using collocation resampling.
   * ```adam_fixed```: train with Adam optimizer wih fixed collocation points
   * ```lbfgs```: train with L-BFGS optimizer with fixed collocation points.
@@ -58,9 +58,7 @@ Conversely, to train *only* with collocation resampling, please set
 
 * ```test_noise``` _(float)_: level of noise added to ground truth $u(x)$ and $h(x)$ profiles during synthetic data generation. Please refer to p. 6 of the main text for the definition of noise level; it may also be helpful to see its implementation in the script ```noise.py```.
 
-* ```test_gammas``` _(list)_: specify one or multiple values of $\gamma$ to test. To conveniently implement logarithmic spacing of $\frac{\gamma}{1-\gamma}$, the user may the specify $\log_{10}(\frac{\gamma}{1-\gamma})$ values using the ```logratios``` variable, then solve for the corresponding $\gamma$-values in the next line (lines 221-222).
-
-Additional information can be found in the line-by-line explanations provided in the code comments.
+* ```test_gammas``` _(list)_: specify one or multiple values of $\gamma$ to test. To conveniently implement logarithmic spacing of $\frac{\gamma}{1-\gamma}$, the user may the specify $\log_{10}(\frac{\gamma}{1-\gamma})$ values using the ```logratios``` variable, then solve for the corresponding $\gamma$-values in the next line.
 
 ## /data
 
