@@ -114,6 +114,31 @@ Results from final test with two 100-hidden units and 1001 collocation points. (
 ## /images
 Contains the images used in the README of this GitHub repo.
 
+# Code Implementation of Collocation Resampling
+
+Training can be switched between using fixed collocation points and collocation resampling by switching the loss function used during training. The loss function evaluated by a given optimizer is specified during the initialization of the optimizer. Use the  ```SquareLoss``` loss function when using fixed collocation points, and ```SquareLossRandom``` for random collocation resampling (see lines 77-100 in 'pinn_trials.py').
+
+Comparing the ```SquareLoss``` and ```SquareLossRandom``` functions in 'loss.py', the main difference between the two functions is in the ```__call__``` method. For ```SquareLossRandom```, we add a few extra lines at the beginning of the  ```__call__``` method (lines 54-61):
+
+```
+def __call__(self, x_eqn, data_pts, net) -> Dict[str, tf.Tensor]:
+    xmin = 0.0
+    xmax = 1.0
+    N_t = 1001
+    _data_type = tf.float64       
+    collocation_pts = xmin + (xmax - xmin) * self.col_gen.uniform(shape = [N_t])
+    collocation_pts = collocation_pts**3
+```
+where ```self.col_gen``` is a stateful random generator defined in the ```__init__``` method (line 52):
+
+```
+        self.col_gen = tf.random.get_global_generator()
+```
+Thus, the ```SquareLossRandom``` function generates a new set of collocation points every time it is called, i.e. at every iteration. 
+
+__Important Note: It is essential to use a _stateful_ random number generator such as ```tf.random.Generator()``` to ensure that the collocation points are resampled after each iteration.__ Using a stateless random generator (such as 
+ those provided in the ```numpy.random``` module, or the ```lhs``` generator used in our codes for fixed collocation point generation) will not allow the collocation points to be updated in a TensorFlow training loop, causing the loss function to behave identically to training with fixed collocation points.
+
 # Citation
 Yunona Iwasaki and Ching-Yao Lai.
 *One-dimensional ice shelf hardness inversion: Clustering behavior and collocation resampling in physics-informed neural networks.* Journal of Computational Physics, Volume 492, 2023, 112435, ISSN 0021-9991, https://doi.org/10.1016/j.jcp.2023.112435.
