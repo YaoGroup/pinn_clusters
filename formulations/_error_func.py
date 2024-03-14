@@ -1,16 +1,8 @@
 import time
 import numpy as np 
 import tensorflow as tf
-# from pinn_clusters import (create_mlp,
-#                            inverse_1st_order_equations,
-#                            SquareLossRandom,SquareLoss,
-#                            get_collocation_points,
-#                            LBFGS, Adam, to_tensor,
-#                            data_equations
-#                            )
-from pinn_clusters import (create_mlp, LBFGS, Adam)
-from ._data import (random_sample, add_noise)
-from ._constants import *
+
+from pinn_clusters import (create_mlp, LBFGS, Adam,random_sample, add_noise)
 from ._formulations import _data_type
 from ._formulations import (inverse_1st_order_equations, to_tensor, get_collocation_points, data_equations)
 from ._loss import (SquareLossRandom, SquareLoss)

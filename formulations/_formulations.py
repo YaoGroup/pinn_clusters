@@ -1,9 +1,9 @@
 import tensorflow as tf
 import numpy as np
 from pyDOE import lhs  # For Latin Hypercube Sampling
-from ._constants import *  # Assuming this contains necessary constants like nu_star, n, A0, etc.
 
 _data_type = tf.float64
+
 
 def data_equations(x, y, neural_net):
     """
@@ -23,16 +23,37 @@ def data_equations(x, y, neural_net):
     h_pred = nn_forward[..., 1]
     return u_data - u_pred, h_data - h_pred
 
-def inverse_1st_order_equations(fractional: bool):
+def inverse_1st_order_equations( fractional:bool,   spy = 60 * 60 * 24 * 365.25, 
+                                rhoi=910,rhow=1028,g=9.81,H0=1.0e3,B0=1.4688e8,n=3):
+ 
+
     """
     Create a function representing inverse first-order equations for use in a PINN.
 
     Args:
         fractional (bool): If True, use the fractional form of the equation.
+        spy = 60 * 60 * 24 * 365.25
+        rhoi = 910.
+        rhow = 1028.
+        g = 9.81
+        H0 = 1.0e3
+        B0 = 1.4688e8
+        n = 3
 
     Returns:
         function: A function that calculates the inverse first-order equations.
     """
+    delta = 1. - rhoi / rhow
+    g = 9.81
+    a = 0.3 / spy
+    Q0 = 4.0e5 / spy
+    Z0 = a ** (1/(n+1)) * (4 * B0) ** (n / (n + 1)) / (rhoi * g * delta) ** (n/(n + 1))
+    U0 = 400 / spy
+    Lx = U0 * Z0 / a
+    h0 = H0 / Z0; q0 = Q0 / (U0 * Z0)
+    nu_star = (2 * B0) / ( rhoi * g * delta * Z0) * (U0 / Lx) ** (1 / n)
+    A0 = (a * Lx) / (U0 * Z0)
+    
     def inverse_1st_order(x, neural_net=None, drop_mass_balance: bool = True):
         """
         The inverse first-order equation calculation.
